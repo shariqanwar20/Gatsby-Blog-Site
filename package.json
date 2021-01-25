@@ -16,8 +16,31 @@
   },
   "license": "0BSD",
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^14.1.2",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.2",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@types/react-redux": "^7.1.16",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "bootstrap": "^4.6.0",
+    "firebase": "^8.2.4",
+    "firebaseui": "^4.7.1",
     "gatsby": "^2.26.1",
+    "gatsby-plugin-firebase": "^0.2.0-beta.4",
+    "gatsby-plugin-material-ui": "^2.1.10",
+    "gatsby-plugin-typescript": "^2.11.0",
+    "gatsby-source-contentful": "^4.5.1",
+    "gatsby-transformer-remark": "^2.15.0",
+    "mdi-material-ui": "^6.21.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-bootstrap": "^1.4.3",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "sweetalert2": "^10.13.1",
+    "typescript": "^4.1.3"
   }
 }

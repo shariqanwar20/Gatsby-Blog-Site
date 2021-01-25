@@ -1,0 +1,27 @@
+.nav-links {
+  color: rgb(152, 152, 153);
+  margin: auto 10px;
+  padding: 10px 0;
+}
+
+.nav-links:hover {
+  text-decoration: none;
+  color: rgb(201, 192, 192);
+}
+
+.button-link {
+  color: rgb(152, 152, 153);
+  margin: auto 10px;
+  text-align: left;
+  margin-left: 0;
+  padding-left: 9px;
+}
+
+.button-link:hover {
+  text-decoration: none;
+  color: rgb(201, 192, 192);
+}
+
+.button-link::selection {
+  text-decoration: none;
+}
