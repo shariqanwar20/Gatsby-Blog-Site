@@ -20,13 +20,14 @@ export default ({ pageContext }) => {
             <h3>{pageContext.data.title}</h3>
             <>
               {documentToReactComponents(JSON.parse(pageContext.data.body.raw))}
-              {pageContext.data.body.references !== undefined ? (
+              {pageContext.data.body.references.length !== 0 ? (
                 <img
                   src={pageContext.data.body.references[0].fluid.src}
                   alt={pageContext.data.title}
                 />
-              ) : // console.log(pageContext.data.body.references[0].fluid.src)
-              null}
+              ) : (
+                console.log("No image")
+              )}
             </>
           </Col>
         </Row>

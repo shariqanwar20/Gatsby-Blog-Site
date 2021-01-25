@@ -5,12 +5,13 @@ import styles from "./blogs.module.css";
 import { Container, Row, Col, Button, Alert } from "react-bootstrap";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import Swal from "sweetalert2";
+import firebase from "gatsby-plugin-firebase";
 
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
-} from "../components/features/signIn";
+// import {
+//   auth,
+//   googleProvider,
+//   facebookProvider,
+// } from "../components/features/signIn";
 import { useDispatch, useSelector } from "react-redux";
 import { userData, userLogin } from "../components/store";
 
@@ -18,21 +19,40 @@ export default () => {
   const dispatch = useDispatch();
   const user = useSelector(userData);
 
-  // const signIn = (value: string) => {
-  //   auth
-  //     .signInWithPopup(value === "google" ? googleProvider : facebookProvider)
-  //     .then((result) => {
-  //       if (result.user !== undefined && result.user !== null) {
-  //         const user = result.user.displayName;
-  //         console.log(user);
+  const signIn = (value: string) => {
+    const auth = firebase.auth();
+    if (value === "google") {
+      const googleProvider = new firebase.auth.GoogleAuthProvider();
+      auth
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+          if (result.user !== undefined && result.user !== null) {
+            const user = result.user.displayName;
+            console.log(user);
 
-  //         dispatch(userLogin(user));
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // };
+            dispatch(userLogin(user));
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else if (value === "facebook") {
+      const facebookProvider = new firebase.auth.FacebookAuthProvider();
+      auth
+        .signInWithPopup(facebookProvider)
+        .then((result) => {
+          if (result.user !== undefined && result.user !== null) {
+            const user = result.user.displayName;
+            console.log(user);
+
+            dispatch(userLogin(user));
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  };
   const data = useStaticQuery(graphql`
     query {
       allContentfulBlog(sort: { fields: publishedDate, order: DESC }) {
@@ -90,26 +110,26 @@ export default () => {
                   {user === "" ? (
                     <Button
                       variant="dark"
-                      // onClick={() => {
-                      //   Swal.fire({
-                      //     title: "Choose Login Method",
-                      //     showDenyButton: true,
-                      //     showConfirmButton: true,
-                      //     confirmButtonText: `Google`,
-                      //     buttonsStyling: true,
-                      //     denyButtonText: `Facebook`,
-                      //     confirmButtonColor: "green",
-                      //     denyButtonColor: "blue",
-                      //   }).then((result) => {
-                      //     if (result.isConfirmed) {
-                      //       //login with google
-                      //       signIn("google");
-                      //     } else if (result.isDenied) {
-                      //       //login with facebook
-                      //       signIn("facebook");
-                      //     }
-                      //   });
-                      // }}
+                      onClick={() => {
+                        Swal.fire({
+                          title: "Choose Login Method",
+                          showDenyButton: true,
+                          showConfirmButton: true,
+                          confirmButtonText: `Google`,
+                          buttonsStyling: true,
+                          denyButtonText: `Facebook`,
+                          confirmButtonColor: "green",
+                          denyButtonColor: "blue",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            //login with google
+                            signIn("google");
+                          } else if (result.isDenied) {
+                            //login with facebook
+                            signIn("facebook");
+                          }
+                        });
+                      }}
                     >
                       Sign In to Read More
                     </Button>
