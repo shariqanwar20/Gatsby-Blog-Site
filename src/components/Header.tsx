@@ -6,11 +6,11 @@ import styles from "./header.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { userData, userLogin, userLogout } from "./store";
 import Swal from "sweetalert2";
-import {
-  auth,
-  googleProvider,
-  facebookProvider,
-} from "../components/features/signIn";
+// import {
+//   auth,
+//   googleProvider,
+//   facebookProvider,
+// } from "../components/features/signIn";
 
 //gatsby logo on the right; Home Blogs Sign in on right
 export const Header = () => {
@@ -20,21 +20,21 @@ export const Header = () => {
   const user = useSelector(userData);
   const dispatch = useDispatch();
 
-  const signIn = (value: string) => {
-    auth
-      .signInWithPopup(value === "google" ? googleProvider : facebookProvider)
-      .then((result) => {
-        if (result.user !== undefined && result.user !== null) {
-          const user = result.user.displayName;
-          console.log(user);
+  // const signIn = (value: string) => {
+  //   auth
+  //     .signInWithPopup(value === "google" ? googleProvider : facebookProvider)
+  //     .then((result) => {
+  //       if (result.user !== undefined && result.user !== null) {
+  //         const user = result.user.displayName;
+  //         console.log(user);
 
-          dispatch(userLogin(user));
-        }
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
+  //         dispatch(userLogin(user));
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -62,26 +62,26 @@ export const Header = () => {
             <Button
               variant="link"
               className={styles.buttonLink}
-              onClick={() => {
-                Swal.fire({
-                  title: "Choose Login Method",
-                  showDenyButton: true,
-                  showConfirmButton: true,
-                  confirmButtonText: `Google`,
-                  buttonsStyling: true,
-                  denyButtonText: `Facebook`,
-                  confirmButtonColor: "green",
-                  denyButtonColor: "blue",
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    //login with google
-                    signIn("google");
-                  } else if (result.isDenied) {
-                    //login with facebook
-                    signIn("facebook");
-                  }
-                });
-              }}
+              // onClick={() => {
+              //   Swal.fire({
+              //     title: "Choose Login Method",
+              //     showDenyButton: true,
+              //     showConfirmButton: true,
+              //     confirmButtonText: `Google`,
+              //     buttonsStyling: true,
+              //     denyButtonText: `Facebook`,
+              //     confirmButtonColor: "green",
+              //     denyButtonColor: "blue",
+              //   }).then((result) => {
+              //     if (result.isConfirmed) {
+              //       //login with google
+              //       signIn("google");
+              //     } else if (result.isDenied) {
+              //       //login with facebook
+              //       signIn("facebook");
+              //     }
+              //   });
+              // }}
             >
               SignIn
             </Button>
