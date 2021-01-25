@@ -1,0 +1,31 @@
+.background-container {
+  background-image: linear-gradient(
+      45deg,
+      rgba(133, 133, 133, 0.6),
+      rgba(182, 182, 182, 0.8)
+    ),
+    url("../images/background-photo.jpg");
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content-container {
+  padding: 7%;
+}
+
+.heading {
+  color: white;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.welcome-container {
+  color: white;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.description {
+  color: white;
+  font-size: larger;
+}

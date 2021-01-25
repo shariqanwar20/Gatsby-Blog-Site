@@ -1,0 +1,20 @@
+.footer-container {
+  background-color: #343a40;
+  color: white;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  line-height: 4;
+}
+
+.icons-container {
+  margin-left: auto;
+}
+
+.icons-container > a {
+  margin: 0 5px;
+}
+
+.footer-container > div {
+  font-weight: normal;
+}
