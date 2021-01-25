@@ -5,6 +5,8 @@ import logo from "../images/icon.jpg";
 import styles from "./header.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { userData, userLogin, userLogout } from "./store";
+import firebase from "gatsby-plugin-firebase";
+
 import Swal from "sweetalert2";
 // import {
 //   auth,
@@ -20,21 +22,40 @@ export const Header = () => {
   const user = useSelector(userData);
   const dispatch = useDispatch();
 
-  // const signIn = (value: string) => {
-  //   auth
-  //     .signInWithPopup(value === "google" ? googleProvider : facebookProvider)
-  //     .then((result) => {
-  //       if (result.user !== undefined && result.user !== null) {
-  //         const user = result.user.displayName;
-  //         console.log(user);
+  const signIn = (value: string) => {
+    const auth = firebase.auth();
+    if (value === "google") {
+      const googleProvider = new firebase.auth.GoogleAuthProvider();
+      auth
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+          if (result.user !== undefined && result.user !== null) {
+            const user = result.user.displayName;
+            console.log(user);
 
-  //         dispatch(userLogin(user));
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // };
+            dispatch(userLogin(user));
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    } else if (value === "facebook") {
+      const facebookProvider = new firebase.auth.FacebookAuthProvider();
+      auth
+        .signInWithPopup(facebookProvider)
+        .then((result) => {
+          if (result.user !== undefined && result.user !== null) {
+            const user = result.user.displayName;
+            console.log(user);
+
+            dispatch(userLogin(user));
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  };
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -62,26 +83,26 @@ export const Header = () => {
             <Button
               variant="link"
               className={styles.buttonLink}
-              // onClick={() => {
-              //   Swal.fire({
-              //     title: "Choose Login Method",
-              //     showDenyButton: true,
-              //     showConfirmButton: true,
-              //     confirmButtonText: `Google`,
-              //     buttonsStyling: true,
-              //     denyButtonText: `Facebook`,
-              //     confirmButtonColor: "green",
-              //     denyButtonColor: "blue",
-              //   }).then((result) => {
-              //     if (result.isConfirmed) {
-              //       //login with google
-              //       signIn("google");
-              //     } else if (result.isDenied) {
-              //       //login with facebook
-              //       signIn("facebook");
-              //     }
-              //   });
-              // }}
+              onClick={() => {
+                Swal.fire({
+                  title: "Choose Login Method",
+                  showDenyButton: true,
+                  showConfirmButton: true,
+                  confirmButtonText: `Google`,
+                  buttonsStyling: true,
+                  denyButtonText: `Facebook`,
+                  confirmButtonColor: "green",
+                  denyButtonColor: "blue",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    //login with google
+                    signIn("google");
+                  } else if (result.isDenied) {
+                    //login with facebook
+                    signIn("facebook");
+                  }
+                });
+              }}
             >
               SignIn
             </Button>
